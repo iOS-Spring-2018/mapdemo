@@ -56,10 +56,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     print(error ?? "")
                     return
                 }
-                print("result: \(placemark?.first)")
-                DispatchQueue.main.async {
-                    self.centerMapTo((placemark?.first?.location)!)
+                if let pm = placemark, let loc2 = pm.first {
+                    print("result: \(loc2)")
+                    DispatchQueue.main.async {
+                        self.centerMapTo(loc2.location!)
+                    }
                 }
+                
                
             }
         }
