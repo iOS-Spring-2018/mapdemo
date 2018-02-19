@@ -12,6 +12,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var streetInput: UITextField!
     
     @IBOutlet weak var map: MKMapView!
     var locationManager = CLLocationManager()
@@ -20,7 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         locationManager.delegate = self // same as Java's this
         locationManager.requestWhenInUseAuthorization()  // goes together with the .plist entry
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,10 +43,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         default: print("access denied")
         }
     }
+    @IBAction func searcBtnPressed(_ sender: Any) {
+        let geoCoder = CLGeocoder()
+        print("you search...")
+        if let streetAdr = streetInput.text{
+            geoCoder.geocodeAddressString(streetAdr){(placemark, error) in
+                print("result: \(placemark?.first)")
+            }
+        }
+    }
     
     @IBAction func satBtnPressed(_ sender: UIButton) {
         map.mapType = MKMapType.satellite
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -41,6 +41,9 @@
                                 <rect key="frame" x="242" y="47" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searcBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BRK-Me-zRz"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,6 +51,7 @@
                     </view>
                     <connections>
                         <outlet property="map" destination="Osa-XV-BdJ" id="ctI-AI-7LD"/>
+                        <outlet property="streetInput" destination="VXk-bd-SJu" id="9J7-VV-C9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
