@@ -29,11 +29,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    fileprivate func centerMapTo(_ loc: CLLocation) {
+        let region = MKCoordinateRegionMakeWithDistance(loc.coordinate, 400, 400)
+        map.setRegion(region, animated: true)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let loc = locations.first {
             print("new position received \(loc)")
-            let region = MKCoordinateRegionMakeWithDistance(loc.coordinate, 400, 400)
-            map.setRegion(region, animated: true)
+            centerMapTo(loc)
         }
     }
     
@@ -48,7 +52,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("you search...")
         if let streetAdr = streetInput.text{
             geoCoder.geocodeAddressString(streetAdr){(placemark, error) in
+                if error != nil {
+                    print(error ?? "")
+                    return
+                }
                 print("result: \(placemark?.first)")
+                DispatchQueue.main.async {
+                    self.centerMapTo((placemark?.first?.location)!)
+                }
+               
             }
         }
     }
